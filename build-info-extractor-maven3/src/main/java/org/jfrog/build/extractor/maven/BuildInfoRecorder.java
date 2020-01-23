@@ -122,11 +122,10 @@ public class BuildInfoRecorder extends AbstractExecutionListener implements Buil
         }
     }
 
-    @Override
-    public void sessionStarted(ExecutionEvent event) {
+    public void init(MavenSession session) {
         try {
             logger.info("Initializing Artifactory Build-Info Recording");
-            buildInfoBuilder = buildInfoModelPropertyResolver.resolveProperties(event, conf);
+            buildInfoBuilder = buildInfoModelPropertyResolver.resolveProperties(session, conf);
             deployableArtifactBuilderMap = Maps.newHashMap();
             matrixParams = Maps.newHashMap();
             Map<String, String> matrixParamProps = conf.publisher.getMatrixParams();
@@ -135,12 +134,8 @@ public class BuildInfoRecorder extends AbstractExecutionListener implements Buil
                 key = StringUtils.removeStartIgnoreCase(key, ClientProperties.PROP_DEPLOY_PARAM_PROP_PREFIX);
                 matrixParams.put(key, matrixParamProp.getValue());
             }
-
-            if (wrappedListener != null) {
-                wrappedListener.sessionStarted(event);
-            }
         } catch (Throwable t) {
-            String message = getClass().getName() + ".sessionStarted() listener has failed: ";
+            String message = getClass().getName() + ".init() listener has failed: ";
             logger.error(message, t);
             throw new RuntimeException(message, t);
         }
