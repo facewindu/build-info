@@ -3,7 +3,7 @@ package org.jfrog.build.api.dependency.pattern;
 
 /**
  * Build dependency, as converted from user input like
- * "libs-release-local:com/goldin/plugins/gradle/0.1.1/*.jar;status+=prod@gradle-plugins :: Build :: Gradle#LATEST => many-jars-build"
+ * "libs-release-local:com/goldin/plugins/gradle/0.1.1/*.jar;status+=prod@gradle-plugins :: Build :: Gradle#LATEST :: many-jars-build"
  */
 public class BuildDependencyPattern extends DependencyPattern {
 

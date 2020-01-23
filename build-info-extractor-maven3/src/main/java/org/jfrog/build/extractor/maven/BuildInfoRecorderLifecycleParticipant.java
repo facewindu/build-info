@@ -67,6 +67,7 @@ public class BuildInfoRecorderLifecycleParticipant extends AbstractMavenLifecycl
     @Override
     public void afterSessionStart(MavenSession session) {
         recorder.init(session);
+        recorder.projectStarted(session.getCurrentProject());
     }
 
     private ArtifactoryClientConfiguration getConfiguration(MavenSession session) {

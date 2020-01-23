@@ -178,12 +178,14 @@ public class BuildInfoRecorder extends AbstractExecutionListener implements Buil
 
     @Override
     public void projectStarted(ExecutionEvent event) {
-        MavenProject project = event.getProject();
-        initModule(project);
-
+        projectStarted(event.getProject());
         if (wrappedListener != null) {
             wrappedListener.projectStarted(event);
         }
+    }
+
+    public void projectStarted(MavenProject project) {
+        initModule(project);
     }
 
     @Override
